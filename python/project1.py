@@ -3,8 +3,10 @@ import random
 computer = random.choice([-1, 0, 1])
 you = input("enter your chocie:")
 youDict = {"s": 1, "w": -1, "g":0}
+reverseDict = {1: "s", -1: "w", 0: "g"}
 youNum = youDict[you]
 
+print(f"you chose {reverseDict[youNum]}\n computer chose {reverseDict[computer]} ")
 
 if(computer == youNum):
     print("you draw!")
