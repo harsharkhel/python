@@ -16,6 +16,10 @@ if __name__ == "__main__":
     speak("Initializing Jarvis")
 
     while True:
+        # listen for the wake word "Jarvis"
+        with sr.Microphone() as source:
+            print("Listening for wake word...")
+            audio = r.listen(source, timeout=5, phrase_time_limit=5)
         try:
             # Listen from microphone
             with sr.Microphone() as source:
@@ -23,7 +27,6 @@ if __name__ == "__main__":
                 audio = r.listen(source, timeout=5, phrase_time_limit=5)
 
             print("Recognizing...")
-
             # Google Speech Recognition
             command = r.recognize_google(audio)
             print(f"You said: {command}")
