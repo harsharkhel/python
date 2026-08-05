@@ -1,0 +1,15 @@
+{
+  "games_played": 1,
+  "wins": 0,
+  "losses": 1,
+  "draws": 0,
+  "total_moves": 64,
+  "total_cp_loss": 6895.0,
+  "blunders": 9,
+  "mistakes": 14,
+  "great_moves": 21,
+  "favorite_openings": {
+    "King's Pawn Opening": 1
+  },
+  "last_played": "2026-08-05T11:57:53.044719"
+}
