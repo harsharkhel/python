@@ -1,0 +1,10 @@
+{
+  "description": "Enables users to create and customize frontend designs effortlessly, streamlining UI development for designers and developers alike.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}

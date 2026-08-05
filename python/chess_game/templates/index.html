@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GrandMaster AI — Play chess against a built-in AI with coaching, analysis, and multiple difficulty levels.">
+    <title>♔ GrandMaster AI — Chess Coach &amp; Trainer</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>♔</text></svg>">
+</head>
+<body>
+
+    <!-- ═══════════════════════════════════════════════════
+         MENU SCREEN
+         ═══════════════════════════════════════════════════ -->
+    <div id="menu-screen" class="screen active">
+        <h1 class="menu-title">♔ GrandMaster AI</h1>
+        <p class="menu-subtitle">AI Chess Coach &amp; Trainer</p>
+
+        <!-- Game Mode -->
+        <div class="menu-section">
+            <div class="menu-section-label">Game Mode</div>
+            <div class="menu-btn-group" id="mode-group">
+                <button class="menu-btn" data-mode="pvp">vs Player</button>
+                <button class="menu-btn selected" data-mode="pvai">vs AI</button>
+                <button class="menu-btn" data-mode="coaching">Coaching</button>
+            </div>
+        </div>
+
+        <!-- AI Difficulty -->
+        <div class="menu-section" id="difficulty-section">
+            <div class="menu-section-label">AI Difficulty</div>
+            <div class="menu-btn-group" id="diff-group">
+                <button class="menu-btn" data-diff="1">Beginner</button>
+                <button class="menu-btn" data-diff="2">Easy</button>
+                <button class="menu-btn selected" data-diff="3">Medium</button>
+                <button class="menu-btn" data-diff="4">Hard</button>
+                <button class="menu-btn" data-diff="5">Expert</button>
+                <button class="menu-btn" data-diff="6">Master</button>
+            </div>
+            <div class="diff-desc" id="diff-desc">Medium • ~1200 Elo</div>
+        </div>
+
+        <!-- Time Control -->
+        <div class="menu-section">
+            <div class="menu-section-label">Time Control</div>
+            <div class="menu-btn-group" id="tc-group">
+                <button class="menu-btn" data-time="60">1 min</button>
+                <button class="menu-btn" data-time="180">3 min</button>
+                <button class="menu-btn selected" data-time="300">5 min</button>
+                <button class="menu-btn" data-time="600">10 min</button>
+                <button class="menu-btn" data-time="1800">30 min</button>
+                <button class="menu-btn" data-time="null">∞</button>
+            </div>
+        </div>
+
+        <button class="start-btn" id="start-btn">Start Game</button>
+        <button class="stats-link" id="stats-link">Player Stats</button>
+        <div class="menu-footer">Built-in AI engine • All standard rules • Coaching &amp; analysis</div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════
+         GAME SCREEN
+         ═══════════════════════════════════════════════════ -->
+    <div id="game-screen" class="screen">
+        <!-- Eval Bar -->
+        <div class="eval-bar-container" id="eval-bar">
+            <div class="eval-bar-white" id="eval-bar-white" style="height: 50%"></div>
+            <div class="eval-bar-label" id="eval-bar-label">+0.0</div>
+        </div>
+
+        <!-- Board Area -->
+        <div class="board-area">
+            <div class="board-with-labels">
+                <div class="rank-labels" id="rank-labels"></div>
+                <div class="chessboard" id="chessboard"></div>
+            </div>
+            <div class="file-labels" id="file-labels"></div>
+        </div>
+
+        <!-- Side Panel -->
+        <div class="side-panel">
+            <!-- Black Clock (top) -->
+            <div class="clock" id="clock-black">
+                <div class="clock-info">
+                    <span class="clock-icon">♚</span>
+                    <span class="clock-name" id="clock-black-name">Black</span>
+                </div>
+                <span class="clock-time" id="clock-black-time">5:00</span>
+            </div>
+
+            <!-- Coach Panel -->
+            <div class="coach-panel" id="coach-panel">
+                <div class="coach-header">
+                    <span class="coach-label">Coach</span>
+                    <span class="coach-eval" id="coach-eval">+0.0</span>
+                </div>
+                <div id="coach-content">
+                    <div class="coach-tip">Make your first move to begin!</div>
+                </div>
+            </div>
+
+            <!-- Move Log -->
+            <div class="move-log">
+                <div class="move-log-title">Moves</div>
+                <div class="move-log-list" id="move-log-list"></div>
+            </div>
+
+            <!-- White Clock (bottom) -->
+            <div class="clock" id="clock-white">
+                <div class="clock-info">
+                    <span class="clock-icon">♔</span>
+                    <span class="clock-name" id="clock-white-name">White</span>
+                </div>
+                <span class="clock-time" id="clock-white-time">5:00</span>
+            </div>
+
+            <!-- Buttons -->
+            <div class="game-buttons">
+                <button class="game-btn resign" id="resign-btn">Resign</button>
+                <button class="game-btn" id="new-game-btn">New Game</button>
+                <button class="game-btn" id="menu-btn">Menu</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════
+         STATS SCREEN
+         ═══════════════════════════════════════════════════ -->
+    <div id="stats-screen" class="screen">
+        <h1 class="stats-title">♔ Player Statistics</h1>
+        <div class="stats-grid" id="stats-grid"></div>
+        <div class="stats-quality" id="stats-quality"></div>
+        <div class="stats-openings" id="stats-openings"></div>
+        <button class="stats-back-btn" id="stats-back-btn">Back to Menu</button>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════
+         OVERLAYS
+         ═══════════════════════════════════════════════════ -->
+    <!-- Game Over -->
+    <div class="game-over-overlay" id="game-over-overlay">
+        <div class="game-over-dialog">
+            <div class="game-over-result" id="go-result"></div>
+            <div class="game-over-reason" id="go-reason"></div>
+            <div class="game-over-buttons">
+                <button class="go-new-game" id="go-new-game">New Game</button>
+                <button class="go-menu" id="go-menu">Main Menu</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Promotion -->
+    <div class="promotion-overlay" id="promotion-overlay">
+        <div class="promotion-dialog">
+            <div class="promotion-title">Promote pawn to:</div>
+            <div class="promotion-pieces" id="promotion-pieces"></div>
+        </div>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div class="spinner" id="spinner">
+        <div class="spinner-icon"></div>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
