@@ -1,6 +1,6 @@
 """
-Constants for the Chess Game.
-Layout dimensions, colors, piece symbols, and time controls.
+Constants for the Chess Game — GrandMaster AI edition.
+Layout, colors, piece symbols, time controls, AI/coaching constants.
 """
 
 # === Layout ===
@@ -8,19 +8,24 @@ SQUARE_SIZE = 80
 BOARD_SQUARES = 8
 BOARD_PX = SQUARE_SIZE * BOARD_SQUARES  # 640
 
-BOARD_X = 35   # Board left edge (space for rank labels)
+# Eval bar sits to the left of the board
+EVAL_BAR_X = 8
+EVAL_BAR_WIDTH = 22
+
+BOARD_X = 50   # Board left edge (shifted right for eval bar + rank labels)
 BOARD_Y = 40   # Board top edge
 
 LABEL_FONT_SIZE = 16
 
-PANEL_X = BOARD_X + BOARD_PX + 25       # 700
+PANEL_X = BOARD_X + BOARD_PX + 20       # 710
 PANEL_Y = BOARD_Y
-PANEL_WIDTH = 270
+PANEL_WIDTH = 280
 PANEL_HEIGHT = BOARD_PX                  # 640
 
-CLOCK_HEIGHT = 55
+CLOCK_HEIGHT = 50
+COACH_HEIGHT = 145                       # Coaching info area between clocks
 
-WINDOW_WIDTH = PANEL_X + PANEL_WIDTH + 25   # 995
+WINDOW_WIDTH = PANEL_X + PANEL_WIDTH + 20   # 1010
 WINDOW_HEIGHT = BOARD_Y + BOARD_PX + 45     # 725
 
 # === Colors ===
@@ -61,6 +66,14 @@ BUTTON_TEXT = (220, 220, 235)
 
 MODAL_BG = (35, 35, 60)
 
+# Move-classification badge colours
+CLS_BRILLIANT  = (0, 180, 230)
+CLS_GREAT      = (90, 200, 120)
+CLS_GOOD       = (160, 200, 120)
+CLS_INACCURACY = (230, 200, 60)
+CLS_MISTAKE    = (230, 150, 50)
+CLS_BLUNDER    = (220, 60, 60)
+
 # === Time Controls ===
 TIME_CONTROLS = [
     ("1 min", 60),
@@ -69,6 +82,17 @@ TIME_CONTROLS = [
     ("10 min", 600),
     ("30 min", 1800),
     ("\u221e", None),       # ∞ for unlimited
+]
+
+# === Game Modes ===
+GAME_MODES = [
+    ("vs Player", "pvp"),
+    ("vs AI",     "pvai"),
+    ("Coaching",  "coaching"),
+]
+
+DIFFICULTY_NAMES = [
+    "Beginner", "Easy", "Medium", "Hard", "Expert", "Master",
 ]
 
 # === Piece Unicode Symbols ===
