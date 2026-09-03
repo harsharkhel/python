@@ -1,15 +1,16 @@
 {
-  "games_played": 2,
+  "games_played": 3,
   "wins": 0,
-  "losses": 2,
+  "losses": 3,
   "draws": 0,
-  "total_moves": 79,
-  "total_cp_loss": 8010.0,
-  "blunders": 10,
-  "mistakes": 15,
-  "great_moves": 26,
+  "total_moves": 123,
+  "total_cp_loss": 36305.0,
+  "blunders": 13,
+  "mistakes": 22,
+  "great_moves": 49,
   "favorite_openings": {
-    "King's Pawn Opening": 2
+    "King's Pawn Opening": 2,
+    "English Opening": 1
   },
-  "last_played": "2026-08-06T18:55:14.125039"
+  "last_played": "2026-08-28T19:15:47.295801"
 }
