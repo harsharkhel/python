@@ -1,7 +1,7 @@
 import itertools
 import time
 
-password = "harsh05"
+password = "6hrs78"
 
 digits = "ahrs0123456789"
 
