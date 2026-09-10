@@ -1,9 +1,9 @@
 import itertools
 import time
 
-password = "6hrs78"
+password = "blrss"
 
-digits = "ahrs0123456789"
+digits = "ahrsblk0123456789"
 
 found = False
 attempts = 0
