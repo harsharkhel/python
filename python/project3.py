@@ -75,7 +75,7 @@ def finger_up(lm, tip, pip):
 
 
 def thumb_folded(lm):
-    return dist(lm[THUMB_TIP], lm[INDEX_MCP]) < 0.08
+    return dist(lm[THUMB_TIP], lm[INDEX_MCP]) < 0.12
 
 
 def is_fist(lm):
@@ -194,6 +194,24 @@ while True:
             gesture = get_gesture(lm)
             fist_now = is_fist(lm)
 
+            # --- DEBUG: print finger states to terminal ---
+            idx_up = finger_up(lm, INDEX_TIP, INDEX_PIP)
+            mid_up = finger_up(lm, MIDDLE_TIP, MIDDLE_PIP)
+            ring_up = finger_up(lm, RING_TIP, RING_PIP)
+            pinky_up = finger_up(lm, PINKY_TIP, PINKY_PIP)
+            thumb_dist = dist(lm[THUMB_TIP], lm[INDEX_MCP])
+            print(
+                f"\rGesture={gesture:20s} | "
+                f"Idx={'UP' if idx_up else 'DN'} "
+                f"Mid={'UP' if mid_up else 'DN'} "
+                f"Ring={'UP' if ring_up else 'DN'} "
+                f"Pinky={'UP' if pinky_up else 'DN'} "
+                f"ThumbDist={thumb_dist:.3f} "
+                f"Fist={fist_now}",
+                end="",
+            )
+            # --- END DEBUG ---
+
             # only click on the moment the fist closes, not every frame
             # while it's held down
             if fist_now and not fist_down:
@@ -201,6 +219,7 @@ while True:
                     left_click()
                     last_click = now
                     status = "Left clicked"
+                    print("  >>> LEFT CLICK!")  # debug
                 fist_down = True
             elif not fist_now:
                 fist_down = False

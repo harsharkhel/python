@@ -1,7 +1,7 @@
 import itertools
 import time
 
-password = "blrss"
+password = "blrss "
 
 digits = "ahrsblk0123456789"
 
@@ -34,3 +34,4 @@ for length in range(1, len(password) + 1):
 
 if not found:
     print("Password not found")
+    print("Attempts:", attempts)
